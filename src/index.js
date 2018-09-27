@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { DragDropContext } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
 import '@atlaskit/css-reset'
 import initialData from './constants'
@@ -13,33 +13,52 @@ const Container = styled.div`
 class App extends React.Component {
   state = initialData
 
-  onDragStart = () => {
+  onDragStart = start => {
     document.body.style.color = 'salmon'
     document.body.style.transition = 'background-color 0.2s ease'
+
+    const homeIndex = this.state.columnOrder.indexOf(start.source.droppableId)
+
+    this.setState({
+      homeIndex,
+    })
   }
 
   onDragUpdate = update => {
     const { destination } = update
-    const opacity = destination
-      ? destination.index / Object.keys(this.state.tasks).length
-      : 0
+    const opacity = destination ? destination.index / Object.keys(this.state.tasks).length : 0
     document.body.style.backgroundColor = `rgba(255, 69, 0, ${opacity})`
   }
 
   onDragEnd = result => {
-    const { destination, source, draggableId } = result
-
     document.body.style.color = 'inherit'
     document.body.style.bacgroundColor = 'inherit'
+
+    this.setState({
+      homeIndex: null,
+    })
+
+    const { destination, source, draggableId, type } = result
 
     if (!destination) {
       return
     }
 
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return
+    }
+
+    if (type === 'column') {
+      const newColumnOrder = Array.from(this.state.columnOrder)
+      newColumnOrder.splice(source.index, 1)
+      newColumnOrder.splice(destination.index, 0, draggableId)
+
+      const newState = {
+        ...this.state,
+        columnOrder: newColumnOrder,
+      }
+
+      this.setState(newState)
       return
     }
 
@@ -104,18 +123,29 @@ class App extends React.Component {
         onDragUpdate={this.onDragUpdate}
         onDragEnd={this.onDragEnd}
       >
-        <Container>
-          {this.state.columnOrder.map(columnId => {
-            const column = this.state.columns[columnId]
-            const tasks = column.taskIds.map(
-              taskId => this.state.tasks[taskId],
-            )
+        <Droppable droppableId="all-columns" direction="horizontal" type="column">
+          {provided => (
+            <Container {...provided.droppableProps} innerRef={provided.innerRef}>
+              {this.state.columnOrder.map((columnId, index) => {
+                const column = this.state.columns[columnId]
+                const tasks = column.taskIds.map(taskId => this.state.tasks[taskId])
 
-            return (
-              <Column key={column.id} column={column} tasks={tasks} />
-            )
-          })}
-        </Container>
+                const isDropDisabled = index < this.state.homeIndex
+
+                return (
+                  <Column
+                    key={column.id}
+                    column={column}
+                    tasks={tasks}
+                    isDropDisabled={isDropDisabled}
+                    index={index}
+                  />
+                )
+              })}
+              {provided.placeholder}
+            </Container>
+          )}
+        </Droppable>
       </DragDropContext>
     )
   }
