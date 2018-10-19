@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 
 class Button extends Component {
   render() {
-    const { bg, children } = this.props
-    return <button style={{ backgroundColor: bg }}>{children}</button>
+    const { bg, padding, children } = this.props
+    return <button style={{ backgroundColor: bg, padding }}>{children}</button>
   }
 }
 
