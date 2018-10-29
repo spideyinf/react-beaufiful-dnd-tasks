@@ -3,7 +3,7 @@ import { setOptions } from '@storybook/addon-options'
 import infoAddon, { setDefaults } from '@storybook/addon-info'
 
 setAddon(infoAddon)
-const req = require.context('../Components', true, /.stories.js$/)
+const req = require.context('../.stories/', true, /.stories.js$/)
 
 setOptions({
   name: 'Test',

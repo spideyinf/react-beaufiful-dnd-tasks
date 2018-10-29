@@ -13,6 +13,11 @@ const ButtonWrapper = styled.button`
     color: white;
     filter: brightness(110%);
   }
+
+  &.test {
+    color: '#FF7F50',
+    background-color: '#4C2618',
+  }
 `
 
 export { ButtonWrapper }
