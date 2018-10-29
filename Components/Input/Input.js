@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class Input extends Component {
   render() {
@@ -10,6 +11,16 @@ class Input extends Component {
       </div>
     )
   }
+}
+
+Input.defaultProps = {
+  placeholder: null,
+}
+
+Input.propTypes = {
+  type: PropTypes.string,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
 }
 
 export default Input

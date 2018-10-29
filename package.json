@@ -16,10 +16,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 6006 -c .storybook"
+    "storybook": "start-storybook -p 9009 -c .storybook"
   },
   "devDependencies": {
     "@storybook/addon-info": "^3.4.11",
+    "@storybook/addon-knobs": "^3.4.11",
+    "@storybook/addon-options": "^3.4.11",
     "@storybook/addons": "^3.4.11",
     "storybook-addon-jsx": "^5.4.0"
   }

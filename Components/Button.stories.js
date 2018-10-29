@@ -3,8 +3,10 @@ import { wInfo } from '../src/utils'
 import { storiesOf } from '@storybook/react'
 import Button from './Button/Button'
 
-storiesOf('Button', module)
-  .addWithJSX(
+const stories = storiesOf('01.Button', module)
+
+stories
+  .add(
     'primary',
     wInfo(`
       Description goes here!
@@ -14,8 +16,13 @@ storiesOf('Button', module)
       </Button>
     )),
   )
-  .addWithJSX('secondary', () => (
-    <Button bg="goldenrod" padding="12px 22px">
-      HALLOWEEN
-    </Button>
-  ))
+  .add(
+    'secondary',
+    wInfo(`
+    This is the demo Button
+  `)(() => (
+      <Button bg="goldenrod" padding="12px 22px">
+        HALLOWEEN
+      </Button>
+    )),
+  )

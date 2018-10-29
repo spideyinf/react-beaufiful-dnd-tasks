@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react'
 import Input from './Input/Input'
 
 storiesOf('Input', module)
-  .addWithJSX(
+  .add(
     'input1',
     wInfo(`
       Description goes here!
@@ -14,7 +14,7 @@ storiesOf('Input', module)
       </Input>
     )),
   )
-  .addWithJSX('input2', () => (
+  .add('input2', () => (
     <Input type="password" placeholder="This is input type 2">
       HALLOWEEN
     </Input>

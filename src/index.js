@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
-import '@atlaskit/css-reset'
 import initialData from './constants'
 import Column from './column'
+
+import './global-styles'
 
 const Container = styled.div`
   display: flex;

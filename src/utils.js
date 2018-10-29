@@ -1,32 +1,34 @@
 import { withInfo } from '@storybook/addon-info'
 
+const fontFamily =
+  "'Helvetica', 'Hiragino Kaku Gothic Pro', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ Pro W3', メイリオ, 'MS Pゴシック', 'ＭＳ ゴシック', 'YuGothic', Meiryo, sans-serif"
+
 const styles = {
-  header: {
-    h1: {
-      marginRight: '20px',
-      fontSize: '22px',
-      display: 'inline',
-      color: 'red',
-    },
-    body: {
-      paddingTop: 0,
-      paddingBottom: 0,
-    },
-    h2: {
-      display: 'inline',
-      color: 'orange',
-    },
+  infoStory: {
+    margin: '42px 0',
   },
   infoBody: {
-    backgroundColor: '#eee',
-    padding: '0 8px',
-    lineHeight: '2',
+    fontFamily,
+    borderWidth: 0,
+    backgroundColor: '#fff',
+    boxShadow: 'none',
+    padding: '0 12px',
     fontSize: '14px',
+  },
+  infoContent: {
+    fontFamily,
+    marginBottom: '12px',
+  },
+  source: {
+    h1: {
+      fontSize: '24px',
+    },
   },
 }
 
 export const wInfo = text =>
   withInfo({
+    header: false,
     inline: true,
     source: true,
     propTables: false,
